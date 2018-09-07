@@ -1,0 +1,112 @@
+﻿@using BoxerWeb.WebUI.VistaModelo
+
+@model TurnoVistaModelo
+
+@{
+    ViewBag.Title = "Detalles Turnos";
+    Layout = null;
+}
+
+<div id="EdicionTurnos">
+
+    <div id="cardDetalleTurnos" class="card contendio-cuerpo scale-transition" style="display:block;margin-left:5px;margin-right:5px;margin-top:5px;margin-top:-260px">
+
+        <div class="card-image">
+            <div class="background">
+                <img src="~/Imagenes/Turnos/background-navigation-header-06.png" class="responsive-img" style="height:300px">
+            </div>
+
+            <span class="card-title" style="padding:0px;margin-bottom:250px;margin-left:340px">
+                @*<a class="waves-effect waves-orange white-text" style="padding-left:15px" data-position="top" data-delay="50" data-tooltip="Editar regi" data-bind="click: editarDetalleAutor, attr: { href: '@Url.Action("")/' + autor.id() }"><i class="material-icons" data-bind="attr: { href: '@Url.Action("")/' + autor.id() }">edit</i></a>
+                    <a class="waves-effect waves-orange modal-trigger white-text" style="padding-left:15px" data-position="top" data-delay="50" data-tooltip="Ver detalle" data-bind="attr: { href: '#modal1' }"><i class="material-icons">delete</i></a>*@
+            </span>
+
+            <span class="card-title" style="padding:0px;margin-bottom:90px">
+                <img src="~/Imagenes/Turnos/ic_timer_white_48pt_3x.png" class="responsive-img">              
+            </span>
+
+            <span class="card-title">                  
+                <b><span data-bind="text:turno.idTurno" class=""></span></b><br/>
+                <span data-bind="text:turno.descripcion" />
+            </span>
+
+            <a data-bind="click:validaYSalva" class="btn-floating btn-large halfway-fab waves-effect waves-circle tooltipped" data-position="top" data-delay="50" data-tooltip="Salvar registro"><i class="material-icons">save</i></a>
+        </div>
+
+        <!-- Contenido card detalle Turno -->
+        <div class="card-content">
+            @*<span class="card-title activator grey-text text-darken-4" data-bind="text:cambiaTituloFormularioAutor()">
+                    Detalles Autor
+                </span>*@
+
+            <div class="row">
+                <form id="formEdicionCreacionTurno" class="col xl12 cmxform" data-bind="submit:validaYSalva" >
+                    <!-- Campo IdTurno -->
+                    <div class="row" style="padding-top:0px;padding-bottom:0px;margin-top:0px;margin-bottom:0px">
+                        <div class="input-field col s12 m12 l12 xl12">
+                            <i class="material-icons prefix">vpn_key</i>
+                            <input id="inputTextIdTurno" name="inputTextIdTurno" type="text" data-bind="textInput:turno.idTurno" data-length="2" disabled class='required idTurnoEstaEnUso' maxlength="2" />
+                            <label for="inputTextIdTurno" class="active">Id Turno</label>
+                            <span for="inputTextIdTurno" class="helper-text" data-error="" data-success="" style="margin-left:40px"></span>
+                        </div>
+                    </div>
+                    
+                    <!-- Campo descripcion -->
+                    @*margin-left:32px*@
+                    <div class="row" style="padding-top:0px;padding-bottom:0px;margin-top:0px;margin-bottom:0px">
+                        <div class="input-field col s12 m12 l12  xl12">
+                            <i class="material-icons prefix">description</i>
+                            <input id="inputTextDescripcion" type="text" data-bind="textInput:turno.descripcion" data-length="30" disabled class='required' maxlength="30" />
+                            <label for="inputTextDescripcion" class="active" >Descripción</label>
+                            <span for="inputTextDescripcion" class="helper-text" data-error="" data-success="" style="margin-left:40px"></span>
+                        </div>
+                    </div>
+
+                    <!-- Campo horaInicio -->
+                    <div class="row" style="padding-top:0px;padding-bottom:0px;margin-top:0px;margin-bottom:0px">
+                        <div class="input-field col s12 m12 l12  xl12">
+                            <i class="material-icons prefix">timer_on</i>
+                            <input id="inputTextHoraInicio" type="text" data-bind="textInput:turno.horaInicio" class="timepicker required hora24" data-length="10" disabled />
+                            <label for="inputTextHoraInicio" class="active">Hora Incio</label>
+                            <span for="inputTextHoraInicio" class="helper-text" data-error="" data-success="" style="margin-left:40px"></span>
+                        </div>
+                    </div>
+
+                    <!-- Campo horaFin -->
+                    <div class="row" style="padding-top:0px;padding-bottom:0px;margin-top:0px;margin-bottom:0px">
+                        <div class="input-field col s12 m12 l12  xl12">
+                            <i class="material-icons prefix">timer_off</i>
+                            <input id="inputTextHoraFin" type="text" data-bind="textInput:turno.horaFin" class="timepicker required hora24" data-length="10" disabled />
+                            <label for="inputTextHoraFin" class="active">Hora Fin</label>
+                            <span for="inputTextHoraFin" class="helper-text" data-error="" data-success="" style="margin-left:40px"></span>
+                        </div>
+                    </div>
+
+                   
+                    @*<a class="btn tooltippedd" data-position="right" data-delay="50" data-tooltip="I am a tooltip">Hover me!</a>
+                        <button id="aSalvar" type="submit" name="action" class="btn waves-effect waves-light " disabled><i class="material-icons left">save</i>Salvar</button>*@
+
+
+                </form>
+            </div>
+        </div>
+
+        <!-- Acciones Turno -->
+        @*<div class="card-action ">
+
+                <div class="row center-align">
+                    <form class="col xl12" data-bind="submit:validaYSalva">
+                        <button id="aSalvar" type="submit" name="action" class="btn waves-effect waves-light " disabled><i class="material-icons left">save</i>Salvar</button>
+                    </form>
+                </div>
+
+            </div>*@
+    </div>
+</div>
+@*@section Scripts
+    {
+        @Scripts.Render("/Scripts/VistaModelos/TurnoEditarCrearVistaModelo.js")
+
+    }*@
+
+@Scripts.Render("/Scripts/VistaModelos/Turno/TurnoEditarCrearVistaModelo.js")

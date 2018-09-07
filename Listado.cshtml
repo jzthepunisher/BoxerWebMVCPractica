@@ -1,0 +1,188 @@
+﻿@using BoxerWeb.WebUI.VistaModelo
+
+@model ListaResultado<TurnoVistaModelo>
+
+@{
+    ViewBag.Title = "Turnos";
+    //var queryOptions = Model.QueryOptions;
+    //Layout = null;
+}
+
+<!-- Espacio Listado Turno -->
+<div id="divEspacioListadoTurno" class="col xl12" style="padding:0px;margin:0px">
+
+    <nav class="nav-extended" style="padding:0px;margin:0px;padding:0px;z-index: 0">
+        <div class="nav-wrapper">
+            <a href="#" id="menu-navbar" data-target="slide-out" class="brand-logo" data-bind="click:muestraSideNav" style="margin-left:20px"><i class=" material-icons">menu</i>BoxerMVC5-MVVM</a>
+
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a></li>
+                @*<li><a class="waves-effect" data-position="top" data-delay="50" data-tooltip="Ver detalle"><i class="material-icons">power_settings_new</i></a></li>*@
+            </ul>
+        </div>
+
+        <div class="nav-content" style="height:200px">
+            <span class="nav-title">
+                <div class="col xl12 valign-wrapper" style="padding-left:100px">
+                    <a href="#!" class="breadcrumb"><b>Base de Datos</b></a>
+                    <a href="#!" class="breadcrumb"><b>Turno</b></a>
+                </div>
+            </span>
+
+            <a id="floatingNuevoAutor" data-bind="click:crearTurno" class="btn-floating btn-large halfway-fab waves-effect waves-circle left tooltipped" style="margin-left:70px" data-position="top" data-delay="50" data-tooltip="Crear registro">
+                <i class="material-icons">add</i>
+            </a>
+        </div>
+    </nav>
+        
+    <div class="row" style="padding:0px;margin:0px">
+        <div id="divListadoTurno" class="col offset-xl2 xl8">
+            <div id="cardListadoAutores" class="card contendio-cuerpo" style="display:block;height:590px;margin-left:5px;margin-right:5px;margin-top:-125px">
+                <!-- Contenido card Turno -->
+                <div class="card-content">
+                    <span class="card-title activator grey-text text-darken-4">
+                        Listado de Turnos
+                        <div class="input-field right" style="width:300px">
+                            <i class="material-icons prefix">search</i>
+                            <input type="text" id="cadenaFiltro" name="cadenaFiltro" data-bind="textInput: pagingService.opcionesConsulta.cadenaFiltro,event: {keypress: pagingService.filtrarTurnos}" href="/Turnos" />
+                            <label id="labelCadenaFiltro" for="cadenaFiltro" class="flow-text"></label>
+                        </div>
+                    </span>
+
+                    <style type="text/css">
+                        tbody {
+                            display: block;
+                            height: 300px;
+                            overflow: auto;
+                        }
+
+                            thead, tbody tr {
+                                display: table;
+                                width: 100%;
+                                table-layout: fixed;
+                            }
+
+                        thead {
+                            width: calc( 100% - 1em );
+                        }
+
+                        table {
+                            width: 100%;
+                        }
+                    </style>
+                    
+                    <!-- Tabla Turno -->
+                    <div class="row">
+                        <div class="col xl12">
+                            <div style="display: none" data-bind="visible: pagingService.entities().length > 0">
+                                <table id="tableListadoAutores" class="bordered striped highlight responsive-table" style="padding:0px;margin:0px">
+                                    <thead>
+                                        <tr style="padding:0px;margin:0px">
+                                            <th class="center-align tooltipped" style="padding:0px;margin:0px;width:100px" data-position="top" data-delay="50" data-tooltip="Ordenar campo">@Html.BuildKnockoutSortableLink("/Turnos", "Id", "Listado", "idTurno")</th>                                           
+                                            <th class="center-align tooltipped" style="padding:0px;margin:0px;width:250px" data-position="top" data-delay="50" data-tooltip="Ordenar campo">@Html.BuildKnockoutSortableLink("/Turnos", "Descripción", "Listado", "descripcion")</th>
+                                            <th class="center-align tooltipped" style="padding:0px;margin:0px;width:140px" data-position="top" data-delay="50" data-tooltip="Ordenar campo">@Html.BuildKnockoutSortableLink("/Turnos", "Hora<br>Inicio", "Listado", "horaInicio")</th>
+                                            <th class="center-align tooltipped" style="padding:0px;margin:0px;width:140px" data-position="top" data-delay="50" data-tooltip="Ordenar campo">@Html.BuildKnockoutSortableLink("/Turnos", "Hora<br>Final", "Listado", "horaFin")</th>
+                                            <th class="center-align " style="padding:0px;margin:0px">Acciones</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody data-bind='template: { foreach:  pagingService.entities, beforeRemove: pagingService.hidePlanetElement, afterAdd: pagingService.showPlanetElement },visible: pagingService.entities().length > 0'>
+                                        <tr>
+                                            <td class="" data-bind="text: idTurno" style="padding:0px;width:100px"></td>
+                                            <td data-bind="text: descripcion" style="padding:0px;width:250px"></td>
+                                            <td class="center-align" data-bind="text: horaInicio" style="padding:0px;width:140px"></td>
+                                            <td class="center-align" data-bind="text: horaFin" style="padding:0px;width:140px"></td>
+                                            <td class="center-align" style="padding:0px">
+                                                <a class="waves-effect tooltipped grey-text text-darken-3" data-position="top" data-delay="50" data-tooltip="Ver detalle" data-bind="click: $parent.mostrarDetalleAutor, attr: { href: '@Url.Action("")/GetTurno' + '?idTurno=' + idTurno }"><i class="material-icons" data-bind="attr: { href: '@Url.Action("")/GetTurno' + '?idTurno=' + idTurno }">remove_red_eye</i></a>
+                                                <a class="waves-effect tooltipped grey-text text-darken-3" data-position="top" data-delay="50" data-tooltip="Editar registro" data-bind="click: $parent.editarDetalleTurno, attr: { href: '@Url.Action("")/GetTurno' + '?idTurno=' + idTurno }"><i class="material-icons" data-bind="attr: { href: '@Url.Action("")/GetTurno' + '?idTurno=' + idTurno }">edit</i></a>                                                
+                                                <a class="waves-effect tooltipped grey-text text-darken-3 modal-trigger " data-position="top" data-delay="50" data-tooltip="Eliminar registro" data-bind="click: $parent.muestraModalEliminarAutor, attr: { href: '@Url.Action("")/' + '?idTurno=' + idTurno }"><i class="material-icons" data-bind="attr: { href: '@Url.Action("")/' + '?idTurno=' + idTurno }">delete</i></a>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                            <div class="card-panel z-depth-0" data-bind="visible: pagingService.entities().length == 0" style="display: none;width:100%;height:100%;margin:10px">
+                                <div class="grey-text">
+                                    <h5 class="center-align "><i class="medium material-icons grey-text text-darken-2">info_outline</i></h5>
+                                    <h5 class="center-align "> No hay turnos para mostrar.</h5>
+                                    <h5 class="center-align ">
+                                        <a data-bind="click:crearTurno" class="btn-flat waves-effect center-align blue-text text-darken-2">
+                                            <b>Crear un turno ahora.</b>
+                                        </a>
+                                    </h5>                                                                     
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Acciones Autor -->
+                <div class="card-action" data-bind="visible: pagingService.entities().length > 0">
+
+                    <label class="col xl4 offset-xl3 right-align" style="margin-top:5px">Filas por página:</label>
+                    <div class="input-field col xl2" style="margin-top:-10px">                        
+
+                        <select id="selectTamanoPagina"
+                                data-bind="options: pagingService.tamanoPaginaDisponibles, optionsText: 'descripcion', optionsValue: 'id', value: pagingService.tamanoPaginaSeleccionado" selected></select>
+                    </div>
+                    @Html.BuildKnockoutNextPreviousLinks("Index")
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="modalEliminarAutorListado" class="modal">
+        <div class="modal-content">
+            <h4>Advertencia</h4>
+            <p class="flow-text">Está seguro de eliminar el registro?.</p>
+        </div>
+
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect btn-flat blue-text text-darken-2">Cancelar</a>
+            <a href="#!" data-bind="click: eliminarAutor, attr: { href: '@Url.Action("")/' }" class="modal-action modal-close waves-effect btn-flat blue-text text-darken-2"><b>OK</b></a>
+        </div>
+    </div>
+</div>
+
+<!-- Detalle Turno -->
+<div id="divEspacioDetalleTurno" class="col xl0" style="display:block;padding:0px;margin:0px">
+    <nav class="nav-extended" style="padding:0px;margin:0px;padding:0px;z-index: 0">
+        <div class="nav-wrapper">
+            
+        </div>
+
+        <div class="nav-content" style="height:200px">
+           
+        </div>
+    </nav>
+
+    <div id="divDetalleTurno" class="col scale-transition scale-out" style="padding:0px;margin:0px">
+
+    </div>
+
+</div>
+
+
+@*<script type="text/javascript" src="~/Scripts/Servicios/ServicioPaginacion.js"></script>
+<script type="text/javascript" src="~/Scripts/VistaModelos/Turno/TurnoListadoVistaModelo.js"></script>
+<script type="text/javascript">        
+    var modeloTurnoListado=@Html.HtmlConvertToJson(Model);
+</script>*@
+
+@section Scripts
+{
+    @Scripts.Render("/Scripts/Servicios/ServicioPaginacion.js", "/Scripts/VistaModelos/Turno/TurnoListadoVistaModelo.js")
+
+    <script type="text/javascript">
+        
+        var modeloTurnoListado = @Html.HtmlConvertToJson(Model);       
+    </script>
+}

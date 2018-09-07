@@ -1,0 +1,19 @@
+﻿<script type="text/html" id="templateTurnoBuscaRapida">
+    <li class="collection-item avatar" data-bind="click:$parent.escogeTurno,event: { mouseover: $parent.seleccionaRegistro, mouseout: $parent.deseleccionaRegistro }" style="height:72px">
+        <div class="row valign-wrapper" style="padding:0px;margin:0px;height:72px">
+            
+            <img src="/Imagenes/Turnos/ic_timer_48pt_3x.png" @*data-bind="attr: { src: '/Imagenes/Turnos/' + turno.fotoNegro }"*@ class="circle" style="padding:0px;margin:0px;width:40px;height:40px">
+            
+            <p>
+                <b><span class="grey-text  text-darken-4" data-bind="text: turno.descripcion"  style="font-size:16px">Turno Mañana</span></b><br>
+                <span class="grey-text text-darken-4" data-bind="text: 'Inicio : ' + turno.horaInicio + ' | '" style="font-size:14px">Inicio : 08:00:00 | Fin : 16:00:00</span>
+                <span class="grey-text text-darken-4" data-bind="text: 'Fin : ' + turno.horaFin" style="font-size:14px">Inicio : 08:00:00 | Fin : 16:00:00</span>
+            </p>
+
+            <div class="secondary-content">
+                <i class="material-icons prefix grey-text text-darken-3 right-align" style="">group_work</i>
+                <b><span class="new badge grey darken-3"  data-bind="text: turno.gruposAsignados" data-badge-caption="" style="font-size:14px;margin-top:0px">11</span></b>
+            </div>
+        </div>
+    </li>
+</script>

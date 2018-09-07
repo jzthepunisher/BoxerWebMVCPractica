@@ -1,0 +1,94 @@
+﻿@using BoxerWeb.WebUI.VistaModelo
+
+@model TurnoVistaModelo
+
+@{
+    ViewBag.Title = "Detalles Turnos";
+    Layout = null;
+}
+
+<div id="DetalleTurnos">      
+
+    <div id="cardDetalleTurnos" class="card contendio-cuerpo" style="display:block;margin-left:5px;margin-right:5px;margin-top:5px;margin-top:-260px">
+        <div class="card-image">
+            <div class="background">
+                <img src="~/Imagenes/Turnos/background-navigation-header-06.png" class="responsive-img" style="height:300px">
+            </div>
+
+            <span class="card-title" style="padding:0px;margin-bottom:250px;margin-left:340px">
+                <a class="waves-effect white-text" style="padding-left:15px" data-position="top" data-delay="50" data-tooltip="Editar registro" data-bind="click: editarDetalleAutor, attr: { href: '@Url.Action("")/GetTurno' + '?idTurno=' + turno.idTurno() }"><i class="material-icons" data-bind="attr: { href: '@Url.Action("")/GetTurno' + '?idTurno=' + turno.idTurno() }">edit</i></a>
+                <a class="waves-effect modal-trigger white-text" data-bind="click: muestraModalEliminarAutor, attr: { href: '@Url.Action("")/' + '?idTurno=' + turno.idTurno() }" style="padding-left:15px" data-position="top" data-delay="50" data-tooltip="Eliminar registro" ><i class="material-icons" data-bind="attr: { href: '@Url.Action("")/' + '?idTurno=' + turno.idTurno() }">delete</i></a>
+            </span>
+           
+            <span class="card-title" style="padding:0px;margin-bottom:90px">
+                <img src="~/Imagenes/Turnos/ic_timer_white_48pt_3x.png" class="responsive-img">
+            </span>
+
+            <span class="card-title">
+                <b><span data-bind="text:turno.idTurno" class=""></span><br /></b>
+                <span data-bind="text:turno.descripcion" />
+            </span>
+        </div>
+
+        <div class="card-content">
+
+            <div class="row">
+               
+                <!-- Campo IdTurno -->
+                <div class="row" style="padding-top:0px;padding-bottom:0px;margin-top:0px;margin-bottom:0px">
+                    <div class="input-field col s12 m12 l12 xl12">
+                        <i class="material-icons prefix">vpn_key</i>
+                        <input id="inputTextIdTurno" name="inputTextIdTurno" type="text" data-bind="textInput:turno.idTurno" data-length="2" disabled class='required idTurnoEstaEnUso' maxlength="2" />
+                        <label for="inputTextIdTurno" class="active">Id Turno</label>                        
+                    </div>
+                </div>
+
+                <!-- Campo descripcion -->
+                @*margin-left:32px*@
+                <div class="row" style="padding-top:0px;padding-bottom:0px;margin-top:0px;margin-bottom:0px">
+                    <div class="input-field col s12 m12 l12  xl12">
+                        <i class="material-icons prefix">description</i>
+                        <input id="inputTextDescripcion" type="text" data-bind="textInput:turno.descripcion" data-length="30" disabled class='required' maxlength="30" />
+                        <label for="inputTextDescripcion" class="active">Descripción</label>                        
+                    </div>
+                </div>
+
+                <!-- Campo horaInicio -->
+                <div class="row" style="padding-top:0px;padding-bottom:0px;margin-top:0px;margin-bottom:0px">
+                    <div class="input-field col s12 m12 l12  xl12">
+                        <i class="material-icons prefix">timer</i>
+                        <input id="inputTextHoraInicio" type="text" data-bind="textInput:turno.horaInicio" class="timepicker required hora24" data-length="10" disabled />
+                        <label for="inputTextHoraInicio" class="active">Hora Inicio</label>                        
+                    </div>
+                </div>
+
+                <!-- Campo horaFin -->
+                <div class="row" style="padding-top:0px;padding-bottom:0px;margin-top:0px;margin-bottom:0px">
+                    <div class="input-field col s12 m12 l12  xl12">
+                        <i class="material-icons prefix">timer_off</i>
+                        <input id="inputTextHoraFin" type="text" data-bind="textInput:turno.horaFin" class="timepicker required hora24" data-length="10" disabled />
+                        <label for="inputTextHoraFin" class="active">Hora Fin</label>                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="modalEliminarTurnoDetalle" class="modal">
+        <div class="modal-content">
+            <h4>Advertencia</h4>
+            <p class="flow-text">Está seguro de eliminar el registro?.</p>
+        </div>
+
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect btn-flat blue-text text-darken-2">Cancelar</a>
+            <a href="#!" data-bind="click: eliminarTurno, attr: { href: '@Url.Action("")/' + '?idTurno=' + turno.idTurno() }" class="modal-action modal-close waves-effect btn-flat blue-text text-darken-2"><b>OK</b></a>
+        </div>
+    </div>
+</div>
+
+
+
+@Scripts.Render("/Scripts/VistaModelos/Turno/TurnoDetalleVistaModelo.js")
